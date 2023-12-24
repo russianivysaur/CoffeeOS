@@ -11,6 +11,13 @@ times 33 db 0 ; empty 33 bytes for bios paramter block
 start:
    jmp 0x7c0:init
 
+
+customInterruptHandler:
+  mov ah,0eh
+  mov al,'A'
+  int 0x10
+  iret
+
 init:
    cli ; Disable bios interrupts
    mov ax,0x7c0
@@ -20,6 +27,10 @@ init:
    mov ss,ax ;Stack segment
    mov sp,0x7c00 ;Stack pointer
    sti ;Enable bios interrupts
+
+   mov word[ss:0x00],customInterruptHandler ; Custom interrupt handler
+   mov word[ss:0x02],0x7c0
+   int 0
    mov si,message
    call startPrint
 
