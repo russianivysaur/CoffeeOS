@@ -1,7 +1,17 @@
-ORG 0x7c00
+ORG 0
 BITS 16
 
+_start:
+   jmp short start
+   nop
+
+times 33 db 0 ; empty 33 bytes for bios paramter block
+
+
 start:
+   jmp 0x7c0:init
+
+init:
    mov si,message
    call startPrint
 
