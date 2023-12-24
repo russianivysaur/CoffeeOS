@@ -12,6 +12,14 @@ start:
    jmp 0x7c0:init
 
 init:
+   cli ; Disable bios interrupts
+   mov ax,0x7c0
+   mov ds,ax ;Data segment
+   mov es,ax ;Extra segment
+   mov ax,0x00
+   mov ss,ax ;Stack segment
+   mov sp,0x7c00 ;Stack pointer
+   sti ;Enable bios interrupts
    mov si,message
    call startPrint
 
