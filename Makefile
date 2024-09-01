@@ -1,4 +1,6 @@
 build:
-	nasm -f bin boot.asm -o boot.bin
-	dd if=disk.txt >> boot.bin
-	dd if=/dev/zero bs=512 count=1 >> boot.bin
+	nasm -f bin src/boot/boot.asm -o bin/boot.bin
+
+
+clean:
+	rm -rf bin/*
