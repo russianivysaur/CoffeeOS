@@ -19,7 +19,7 @@ _start:
 ;Enable segments and print a message
 init:
     cli
-    mov ax,0
+    mov ax,0x00
     mov ds,ax
     mov es,ax
     mov ax,0x00
@@ -37,10 +37,10 @@ load_gdt:
     or al,1 ;Enabling PE bit in CR0
     mov cr0,eax
     jmp CODE_SEG:protected
-    
-    
+
+
 ;gdt
-gdt: 
+gdt:
     dw gdt_end - gdt_start - 1
     dd gdt_start
 
@@ -88,10 +88,22 @@ load_from_disk:
     int 0x13
     mov si,buffer
     call print_message
-    
+
+
 [BITS 32]
 protected:
-     mov eax,999
+     mov eax,DATA_SEG
+     mov ds,eax
+     mov es,eax
+     mov fs,eax
+     mov gs,eax
+     mov ss,eax
+     mov ebp,0x00200000
+     ;A20 line
+     in al,0x92
+     or al,2
+     out 0x92,al
+
      jmp $
 
 
