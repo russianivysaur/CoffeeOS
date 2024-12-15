@@ -1,7 +1,7 @@
 text db "Hello, Welcome to Coffee Bootloader.",0
 diskerror db "Disk error.",0
 sectorerror db "Sector error.",0
-success db "Kernel loaded successfully at 0x1000",0
+success db "Kernel loaded successfully",0
 display_fancy_text:
      mov si,text
      mov ah,0xE

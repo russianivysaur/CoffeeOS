@@ -1,3 +1,4 @@
+align 8
 gdt_start:
       dq 0
 

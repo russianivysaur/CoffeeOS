@@ -1,6 +1,7 @@
-#include "printing_utils.h"
-void main() {
-  clear_screen();
-  print_string("Hello World!\n");
+#include "vga.h"
+void main(){
+  volatile char* ideoMemory = VIDEO_MEMORY_ADDRESS;
+  cls();
+  char* hello = "Hello, It's a work in progress";
+  centerWrite(hello);
 }
-

@@ -1,6 +1,8 @@
 [bits 16]
 switch32:
     cli
+    mov al, 0x02
+    out 0x92, al
     lgdt [gdt_descriptor]
     mov eax,cr0
     or eax, 0x1
