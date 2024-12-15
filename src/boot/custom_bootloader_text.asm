@@ -1,4 +1,4 @@
-text db "Hello, Welcome to Coffee Bootloader. We will start by loading your kernel into memory at address 0x1000.",0
+text db "Hello, Welcome to Coffee Bootloader.",0
 diskerror db "Disk error.",0
 sectorerror db "Sector error.",0
 success db "Kernel loaded successfully at 0x1000",0

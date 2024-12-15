@@ -17,7 +17,7 @@ init:
     mov fs,ax
     mov gs,ax
 
-    mov ebp,0x900000
+    mov ebp,0x90000
     mov esp,ebp
 
     call launch_kernel

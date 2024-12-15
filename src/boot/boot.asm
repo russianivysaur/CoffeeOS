@@ -14,7 +14,6 @@ mov sp,bp
 
 
 call display_fancy_text
-jmp $
 call load_kernel
 call switch32
 jmp $
@@ -27,7 +26,6 @@ jmp $
 launch_kernel:
       call KERNEL_START
       jmp $
-
 
 times 510 - ($-$$) db 0
 dw 0xaa55
