@@ -1,8 +1,8 @@
-all: ./build/os.bin
-	dd bs=512 count=4 if=/dev/zero >> ./build/os.bin
-	qemu-system-x86_64 -hda ./build/os.bin
+all: ./build/os.iso
+	dd bs=512 count=100 if=/dev/zero >> ./build/os.iso
+	qemu-system-x86_64 -hda ./build/os.iso
 
-./build/os.bin: ./build/boot.bin ./build/kernel.bin
+./build/os.iso: ./build/boot.bin ./build/kernel.bin
 	cat $^ > $@
 
 ./build/boot.bin: ./src/boot/boot.asm
@@ -16,3 +16,7 @@ all: ./build/os.bin
 
 ./build/kernel_start.o: ./src/kernel/kernel_start.asm
 	nasm -f elf -o $@ $<
+
+
+clean:
+	rm ./build/*

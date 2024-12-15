@@ -1,12 +1,20 @@
 [bits 16]
 [org 0x7c00]
+bpb:
+  jmp short here
+  nop
+
+  times 33 db 0
+
+here:
 KERNEL_START EQU 0x1000
 
-mov bp,0x9000
+mov bp,0x7c00
 mov sp,bp
 
 
 call display_fancy_text
+jmp $
 call load_kernel
 call switch32
 jmp $
