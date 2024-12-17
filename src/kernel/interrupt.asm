@@ -3,4 +3,6 @@ section .asm
 global interrupt
 
 interrupt:
-       int 0x15
+       mov eax,0
+       mov ebx,1
+       div eax

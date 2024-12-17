@@ -5,7 +5,7 @@
 #ifndef IDT_H
 #define IDT_H
 
-#define INTERRUPT_COUNT 20
+#define INTERRUPT_COUNT 100
 
 void add_interrupt(uint16_t,void*);
 void init_idtr();

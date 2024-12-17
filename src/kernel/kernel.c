@@ -83,10 +83,10 @@ extern void interrupt();
 
 void main(void){
   cls();
-  add_interrupt(15,handler);
+  add_interrupt(0,handler);
   init_idtr();
   unsigned char* message = (unsigned char*)WELCOME;
   kernel_print(message);
-  interrupt();
+  //interrupt();
 }
 
