@@ -5,9 +5,14 @@ Requirements :
 4. nasm
 
 Run these commands for a iso file :
+
 -> ./build.sh
 (outputs a coffee.iso in build folder)
 
 
+
+
+
+...............................
 
 You can also download the iso from here.
