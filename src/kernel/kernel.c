@@ -89,6 +89,7 @@ void main(void){
   kernel_print((unsigned char*)"GDT Loaded\n");
   add_interrupt(0,handler);
   init_idt();
-  interrupt();
+  kernel_print((unsigned char*)"IDT Loaded\n");
+  //interrupt();
 }
 
