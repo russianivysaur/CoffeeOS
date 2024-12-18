@@ -75,8 +75,10 @@ void kernel_print(unsigned char* string){
   }
 }
 
+void help(){}
 void handler(){
   kernel_print((unsigned char*)"No one defined divide with zero to me, mate\n");
+  help();
 }
 
 extern void interrupt();
