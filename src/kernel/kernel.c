@@ -75,12 +75,7 @@ void kernel_print(unsigned char* string){
   }
 }
 
-void help(){}
-void handler(){
-  kernel_print((unsigned char*)"No one defined divide with zero to me, mate\n");
-  help();
-}
-
+extern void handler();
 extern void interrupt();
 
 void main(void){
@@ -89,7 +84,7 @@ void main(void){
   kernel_print(message);
   init_gdt();
   kernel_print((unsigned char*)"GDT Loaded\n");
-  add_interrupt(0,handler);
+  add_interrupt(33,handler);
   init_idt();
   kernel_print((unsigned char*)"IDT Loaded\n");
   //interrupt();
