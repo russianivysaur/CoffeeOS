@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "kernel.h"
 #include "../idt/idt.h"
+#include "../gdt/gdt.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -75,18 +76,19 @@ void kernel_print(unsigned char* string){
 }
 
 void handler(){
-	kernel_print((unsigned char*)"Interuppt");
+  kernel_print((unsigned char*)"No one defined divide with zero to me, mate\n");
 }
-
 
 extern void interrupt();
 
 void main(void){
   cls();
-  add_interrupt(0,handler);
-  init_idtr();
   unsigned char* message = (unsigned char*)WELCOME;
   kernel_print(message);
-  //interrupt();
+  init_gdt();
+  kernel_print((unsigned char*)"GDT Loaded\n");
+  add_interrupt(0,handler);
+  init_idt();
+  interrupt();
 }
 

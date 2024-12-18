@@ -1,9 +1,6 @@
 section .asm
 global load_idt
 load_idt:
-    push ebp
-    mov ebp,esp
-    mov ebx,[ebp+8]
+    mov ebx,[esp+4]
     lidt[ebx]
-    pop ebp
     ret

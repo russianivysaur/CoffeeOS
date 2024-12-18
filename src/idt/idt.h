@@ -8,7 +8,7 @@
 #define INTERRUPT_COUNT 100
 
 void add_interrupt(uint16_t,void*);
-void init_idtr();
+void init_idt();
 
 //table descriptor
 struct IDTRDescriptor{
