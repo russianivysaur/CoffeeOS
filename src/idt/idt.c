@@ -29,7 +29,6 @@ void init_idt(){
   pic_remap(PIC_1_OFFSET, PIC_2_OFFSET);
 }
 
-
 void c_handler(){
   unsigned char ascii[256] =
 	{
@@ -45,9 +44,15 @@ void c_handler(){
 		'8', '9', '-', '4', '5', '6', '+', '1',		// 72 - 79
 		'2', '3', '0', '.'				// 80 - 83
 	};
-  uint8_t index = read_keyboard_data();
-  unsigned char string[1];
-  string[0] = ascii[11];
-  kernel_print(&string[0]);
+  int index = (int)read_keyboard_data();
+  if(index<80){
+    uint8_t s[10];
+    itoa(index,s);
+    kernel_print((unsigned char*)&s[0]);
+    unsigned char string[2];
+    string[0] = ascii[3];
+    string[1] = '\0';
+    kernel_print(&string[0]);
+  }
   pic_ack();
 }

@@ -10,8 +10,10 @@
 
 
 uint8_t read_keyboard_data(){
-  return inb(KEYBOARD_DATA_PORT);
+  uint8_t ret = inb(KEYBOARD_DATA_PORT);
+  return ret;
 }
+
 void pic_ack(){
   outb(0x20,0x20);
 }
