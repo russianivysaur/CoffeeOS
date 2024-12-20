@@ -25,5 +25,5 @@ _start:
     mov esp, kernel_stack + KERNEL_STACK_SIZE
     call main
 
-.loop:
-    jmp .loop
+.loophehe:
+    jmp .loophehe
