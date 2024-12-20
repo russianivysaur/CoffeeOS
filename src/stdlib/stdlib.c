@@ -28,14 +28,3 @@ void memset(void* dst,int c,size_t len){
         c_ptr[i] = c;
     }
 }
-
-
-uint32_t kalloc(uint32_t length){
-  uint32_t allocated = (uint32_t) &kernel_end;
-  kernel_end += length;
-  return allocated;
-}
-
-void kfree(void* address,uint32_t length) {
-
-}

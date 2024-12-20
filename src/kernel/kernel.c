@@ -77,7 +77,6 @@ void kernel_print(unsigned char* string){
 }
 
 extern void handler();
-extern void interrupt();
 
 void main(void){
   cls();
@@ -88,7 +87,6 @@ void main(void){
   add_interrupt(33,handler);
   init_idt();
   kernel_print((unsigned char*)"IDT Loaded\n");
-  kernel_print((unsigned char*)&store[0]);
   //interrupt();
 }
 
