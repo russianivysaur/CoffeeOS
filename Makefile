@@ -2,7 +2,7 @@ DEBUG_FILE = ./build/kernelfull.o
 
 all: ./build/coffee.iso
 
-./build/coffee.iso: ./build/boot.o ./build/kernel.o ./build/idt.o ./build/load_idt.o ./build/handler.o ./build/stdlib.o ./build/gdt.o ./build/load_gdt.o ./build/pic.o ./build/io.o
+./build/coffee.iso: ./build/boot.o ./build/kernel.o ./build/idt.o ./build/load_idt.o ./build/handler.o ./build/stdlib.o ./build/gdt.o ./build/load_gdt.o ./build/pic.o ./build/io.o ./build/kheap.o ./build/heap.o
 	i686-elf-ld -g -T linker.ld -o $(DEBUG_FILE) $^
 	i686-elf-gcc -g -T linker.ld -o $@ -ffreestanding -O2 -nostdlib $^ -lgcc
 
@@ -41,6 +41,13 @@ all: ./build/coffee.iso
 
 ./build/io.o: ./src/port-io/io.asm
 	nasm -f elf -o $@ $<
+
+
+./build/kheap.o: ./src/heap/kheap.c
+	i686-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+
+./build/heap.o: ./src/heap/heap.c
+	i686-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 
 clean:
 	rm -rf ./build/*

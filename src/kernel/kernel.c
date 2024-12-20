@@ -5,6 +5,8 @@
 #include "../idt/idt.h"
 #include "../gdt/gdt.h"
 #include "../stdlib/stdlib.h"
+#include "../heap/kheap.h"
+#include "../heap/heap.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -87,6 +89,11 @@ void main(void){
   add_interrupt(33,handler);
   init_idt();
   kernel_print((unsigned char*)"IDT Loaded\n");
+  struct Heap* heap = init_kheap();
+  uint32_t pointer = alloc(32,heap);
+  uint32_t pointer2 = alloc(33,heap);
+  while(pointer2){}
+  while(pointer){}
   //interrupt();
 }
 
