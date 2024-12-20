@@ -5,6 +5,7 @@
 #include "stdlib.h"
 #include <stddef.h>
 
+extern uint32_t kernel_end;
 void itoa(int num,uint8_t* buffer){
   int i=0;
   if(num==0){
@@ -26,4 +27,15 @@ void memset(void* dst,int c,size_t len){
     for(size_t i=0;i<len;i++){
         c_ptr[i] = c;
     }
+}
+
+
+uint32_t kalloc(uint32_t length){
+  uint32_t allocated = (uint32_t) &kernel_end;
+  kernel_end += length;
+  return allocated;
+}
+
+void kfree(void* address,uint32_t length) {
+
 }

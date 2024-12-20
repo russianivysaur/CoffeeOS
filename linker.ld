@@ -1,4 +1,3 @@
-
 ENTRY(_start)
 SECTIONS
 {
@@ -22,3 +21,5 @@ SECTIONS
 		*(.bss)
 	}
 }
+
+kernel_end = .;

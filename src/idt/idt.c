@@ -45,14 +45,5 @@ void c_handler(){
 		'2', '3', '0', '.'				// 80 - 83
 	};
   int index = (int)read_keyboard_data();
-  if(index<80){
-    uint8_t s[10];
-    itoa(index,s);
-    kernel_print((unsigned char*)&s[0]);
-    unsigned char string[2];
-    string[0] = ascii[3];
-    string[1] = '\0';
-    kernel_print(&string[0]);
-  }
   pic_ack();
 }

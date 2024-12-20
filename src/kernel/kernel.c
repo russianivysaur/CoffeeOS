@@ -4,6 +4,7 @@
 #include "kernel.h"
 #include "../idt/idt.h"
 #include "../gdt/gdt.h"
+#include "../stdlib/stdlib.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -87,6 +88,7 @@ void main(void){
   add_interrupt(33,handler);
   init_idt();
   kernel_print((unsigned char*)"IDT Loaded\n");
+  kernel_print((unsigned char*)&store[0]);
   //interrupt();
 }
 
