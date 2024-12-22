@@ -6,7 +6,6 @@
 #include "../gdt/gdt.h"
 #include "../stdlib/stdlib.h"
 #include "../heap/kheap.h"
-#include "../heap/heap.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -59,7 +58,7 @@ void cls(){
   }
 }
 
-void kernel_print(unsigned char* string){
+void print(unsigned char* string){
   while(*string != '\0') {
     if(*string == '\n'){
       curr_row++;
@@ -78,22 +77,26 @@ void kernel_print(unsigned char* string){
   }
 }
 
+void println(unsigned char* string){
+  print(string);
+  curr_row++;
+  curr_col = 1;
+}
+
 extern void handler();
 
 void main(void){
   cls();
   unsigned char* message = (unsigned char*)WELCOME;
-  kernel_print(message);
+  println(message);
   init_gdt();
-  kernel_print((unsigned char*)"GDT Loaded\n");
+  println((unsigned char*)"GDT Loaded");
   add_interrupt(33,handler);
   init_idt();
-  kernel_print((unsigned char*)"IDT Loaded\n");
+  println((unsigned char*)"IDT Loaded");
+
+  //heap
   struct Heap* heap = init_kheap();
-  uint32_t pointer = alloc(32,heap);
-  uint32_t pointer2 = alloc(33,heap);
-  while(pointer2){}
-  while(pointer){}
-  //interrupt();
+  //use kalloc and kfree for allocating and freeing memory
 }
 

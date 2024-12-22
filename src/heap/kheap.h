@@ -8,4 +8,6 @@
 #define KERNEL_HEAP_SIZE 6400000 //100 mb
 
 struct Heap* init_kheap();
+uint32_t* kalloc(uint32_t,struct Heap*);
+void kfree(uint32_t*,struct Heap*);
 #endif //KHEAP_H

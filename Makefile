@@ -4,7 +4,7 @@ all: ./build/coffee.iso
 
 ./build/coffee.iso: ./build/boot.o ./build/kernel.o ./build/idt.o ./build/load_idt.o ./build/handler.o ./build/stdlib.o ./build/gdt.o ./build/load_gdt.o ./build/pic.o ./build/io.o ./build/kheap.o ./build/heap.o
 	i686-elf-ld -g -T linker.ld -o $(DEBUG_FILE) $^
-	i686-elf-gcc -g -T linker.ld -o $@ -ffreestanding -O2 -nostdlib $^ -lgcc
+	i686-elf-gcc -g -T linker.ld -o $@ -ffreestanding -O0 -nostdlib $^ -lgcc
 
 ./build/boot.o: ./src/boot/boot.asm
 	nasm -f elf $< -o $@
@@ -47,7 +47,7 @@ all: ./build/coffee.iso
 	i686-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O2 -Wall -Wextra
 
 ./build/heap.o: ./src/heap/heap.c
-	i686-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+	i686-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O0 -Wall -Wextra
 
 clean:
 	rm -rf ./build/*
