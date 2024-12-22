@@ -92,23 +92,22 @@ void main(void){
   println(message);
   init_gdt();
   println((unsigned char*)"GDT Loaded");
-
-  uint8_t* memory0 = (uint8_t*) 0x1000;
-  memory0[0] = 'A';
-  memory0[1] = 'B';
-  memory0[2] = '\0';
-  //heap
-  struct Heap* heap = init_kheap();
-  uint32_t* memory1 = kalloc(100,heap);
-  println((unsigned char*)"100 mb kernel heap allocated");
-  //paging
-  uint32_t* kernel_page_directory = init_paging(heap);
-  map_directory_to_address(kernel_page_directory,0x1000,(uint32_t)memory1);
-  println((unsigned char*)"Paging enabled");
-  println((unsigned char*)memory1);
-
   add_interrupt(33,handler);
   init_idt();
   println((unsigned char*)"IDT Loaded");
+  //heap
+  struct Heap* heap = init_kheap();
+  println((unsigned char*)"100 mb kernel heap allocated");
+  //paging
+  uint32_t* memory1 = kzalloc(2,heap);
+  uint32_t* kernel_page_directory = create_page_directory(heap);
+  map_directory_to_address(kernel_page_directory,0x1000,(uint32_t)memory1);
+  init_paging(kernel_page_directory);
+  uint8_t* memory0 = (uint8_t*) 0x1000;
+  memory0[0] = 'A';
+  memory0[1] = 'B';
+  println((unsigned char*)"Paging enabled");
+  println((unsigned char*)memory0);
+  println((unsigned char*)memory1);
 }
 

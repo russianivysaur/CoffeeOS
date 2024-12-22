@@ -7,7 +7,8 @@
 #define PAGING_H
 extern void load_page_directory(uint32_t*);
 extern void enable_paging();
-uint32_t* init_paging(struct Heap* kheap);
+uint32_t* create_page_directory(struct Heap* kheap);
+void init_paging(uint32_t* kernel_page_directory);
 void map_directory_to_address(uint32_t* directory,uint32_t virtual_addr,uint32_t phys_addr);
 #define PAGING_PRESENT        0b00000001
 #define PAGING_WRITABLE       0b00000010
