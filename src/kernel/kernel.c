@@ -99,10 +99,10 @@ void main(void){
   struct Heap* heap = init_kheap();
   println((unsigned char*)"100 mb kernel heap allocated");
   //paging
-  uint32_t* memory1 = kzalloc(2,heap);
-  uint32_t* kernel_page_directory = create_page_directory(heap);
-  map_directory_to_address(kernel_page_directory,0x1000,(uint32_t)memory1);
-  init_paging(kernel_page_directory);
+  uint32_t* memory1 = kzalloc(100,heap);
+
+
+
   uint8_t* memory0 = (uint8_t*) 0x1000;
   memory0[0] = 'A';
   memory0[1] = 'B';
