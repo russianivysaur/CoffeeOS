@@ -10,4 +10,5 @@
 struct Heap* init_kheap();
 uint32_t* kalloc(uint32_t,struct Heap*);
 void kfree(uint32_t*,struct Heap*);
+uint32_t* kzalloc(uint32_t size,struct Heap* heap);
 #endif //KHEAP_H

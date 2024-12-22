@@ -6,6 +6,7 @@
 #include "../gdt/gdt.h"
 #include "../stdlib/stdlib.h"
 #include "../heap/kheap.h"
+#include "../paging/paging.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -91,12 +92,23 @@ void main(void){
   println(message);
   init_gdt();
   println((unsigned char*)"GDT Loaded");
+
+  uint8_t* memory0 = (uint8_t*) 0x1000;
+  memory0[0] = 'A';
+  memory0[1] = 'B';
+  memory0[2] = '\0';
+  //heap
+  struct Heap* heap = init_kheap();
+  uint32_t* memory1 = kalloc(100,heap);
+  println((unsigned char*)"100 mb kernel heap allocated");
+  //paging
+  uint32_t* kernel_page_directory = init_paging(heap);
+  map_directory_to_address(kernel_page_directory,0x1000,(uint32_t)memory1);
+  println((unsigned char*)"Paging enabled");
+  println((unsigned char*)memory1);
+
   add_interrupt(33,handler);
   init_idt();
   println((unsigned char*)"IDT Loaded");
-
-  //heap
-  struct Heap* heap = init_kheap();
-  //use kalloc and kfree for allocating and freeing memory
 }
 
