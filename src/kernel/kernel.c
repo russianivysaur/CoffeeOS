@@ -96,18 +96,8 @@ void main(void){
   init_idt();
   println((unsigned char*)"IDT Loaded");
   //heap
-  struct Heap* heap = init_kheap();
+  init_kheap();
   println((unsigned char*)"100 mb kernel heap allocated");
   //paging
-  uint32_t* memory1 = kzalloc(100,heap);
-
-
-
-  uint8_t* memory0 = (uint8_t*) 0x1000;
-  memory0[0] = 'A';
-  memory0[1] = 'B';
-  println((unsigned char*)"Paging enabled");
-  println((unsigned char*)memory0);
-  println((unsigned char*)memory1);
 }
 
