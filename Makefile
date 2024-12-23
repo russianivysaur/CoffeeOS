@@ -2,7 +2,7 @@ DEBUG_FILE = ./build/kernelfull.o
 
 all: ./build/coffee.iso
 
-./build/coffee.iso: ./build/boot.o ./build/kernel.o ./build/idt.o ./build/load_idt.o ./build/handler.o ./build/stdlib.o ./build/gdt.o ./build/load_gdt.o ./build/pic.o ./build/io.o ./build/kheap.o ./build/heap.o ./build/paging.o ./build/enable_paging.o
+./build/coffee.iso: ./build/boot.o ./build/kernel.o ./build/idt.o ./build/load_idt.o ./build/handler.o ./build/stdlib.o ./build/gdt.o ./build/load_gdt.o ./build/pic.o ./build/io.o ./build/kheap.o ./build/heap.o ./build/paging.o ./build/enable_paging.o ./build/ata.o
 	i686-elf-ld -g -T linker.ld -o $(DEBUG_FILE) $^
 	i686-elf-gcc -g -T linker.ld -o $@ -ffreestanding -O0 -nostdlib $^ -lgcc
 
@@ -55,6 +55,10 @@ all: ./build/coffee.iso
 
 ./build/enable_paging.o: ./src/paging/enable_paging.asm
 	nasm -f elf -g -o $@ $<
+
+
+./build/ata.o: ./src/drivers/ata/ata.c
+	i386-elf-gcc -g -c $< -o $@ -std=gnu99 -ffreestanding -O0 -Wall -Wextra
 
 clean:
 	rm -rf ./build/*
