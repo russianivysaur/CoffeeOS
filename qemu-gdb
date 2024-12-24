@@ -1,1 +1,1 @@
-qemu-system-i386 -cdrom ./build/coffee.iso -hda disk.txt -s -S
+qemu-system-i386 -cdrom ./build/coffee.iso -hda fat16.img -s -S
