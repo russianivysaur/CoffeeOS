@@ -7,7 +7,7 @@
 #include "../stdlib/stdlib.h"
 #include "../heap/kheap.h"
 #include "../paging/paging.h"
-#include "../drivers/ata/ata.h"
+#include "../fs/fat16/fat16.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -119,12 +119,11 @@ void main(void){
   init_idt();
   println((unsigned char*)"IDT Loaded");
 
+  //fs
+  struct BiosParameterBlock* block = read_bpb();
+  println((unsigned char*)block->oem_identifier);
+  while(block){
 
-
-  //reading from disk
-  uint32_t* buffer = kzalloc(10000);
-  lba_read(0,10,(uint16_t*)buffer);
-  println((unsigned char*)buffer);
-  while(1){}
+  }
 }
 
