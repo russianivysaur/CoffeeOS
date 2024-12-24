@@ -1,1 +1,1 @@
-qemu-system-i386 -hda ./build/coffee.iso -s -S
+qemu-system-i386 -cdrom ./build/coffee.iso -hda disk.txt -s -S

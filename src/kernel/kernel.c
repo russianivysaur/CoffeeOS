@@ -7,6 +7,7 @@
 #include "../stdlib/stdlib.h"
 #include "../heap/kheap.h"
 #include "../paging/paging.h"
+#include "../drivers/ata/ata.h"
 enum vga_color {
 	VGA_COLOR_BLACK = 0,
 	VGA_COLOR_BLUE = 1,
@@ -96,6 +97,8 @@ void main(void){
   //heap
   init_kheap();
   println((unsigned char*)"100 mb kernel heap allocated");
+
+
   //paging
   uint32_t* kernel_page_directory = create_directory();
   switch_directory(kernel_page_directory);
@@ -111,9 +114,17 @@ void main(void){
   println((unsigned char*)"Enabled paging");
 
 
+  //interuupts and idt
   add_interrupt(33,handler);
   init_idt();
   println((unsigned char*)"IDT Loaded");
+
+
+
+  //reading from disk
+  uint32_t* buffer = kzalloc(10000);
+  lba_read(0,10,(uint16_t*)buffer);
+  println((unsigned char*)buffer);
   while(1){}
 }
 

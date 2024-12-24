@@ -35,7 +35,7 @@
 
 void pic_remap(int offset1, int offset2);
 extern uint8_t inb(uint16_t port);
-extern void outb(uint8_t data,uint16_t port);
+extern void outb(uint16_t port,uint8_t data);
 void pic_ack();
 uint8_t read_keyboard_data();
 #endif //PIC_H

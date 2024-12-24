@@ -14,8 +14,9 @@
 #define READ_COMMAND 0x20
 #define DATA_PORT 0x1f0
 #define DATA_READY_FLAG 8
-extern void outb(uint8_t,uint16_t);
+extern void outb(uint16_t,uint8_t);
 extern uint8_t inb(uint16_t);
+extern uint16_t inw(uint16_t);
 enum Mode {
   CHS,
   LBA
@@ -25,6 +26,6 @@ enum Mode {
 //void chs_write();
 
 //LBA
-void lba_read();
+void lba_read(uint32_t,uint8_t,uint16_t*);
 void lba_write();
 #endif //ATA_H
