@@ -23,6 +23,10 @@ struct BiosParameterBlock{
   //uint32_t large_sector_count;
 };
 
+struct Root{
+
+};
+
 struct FAT{
 
 };
